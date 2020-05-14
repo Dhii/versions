@@ -31,6 +31,10 @@
       <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/vendor/phar-io/version" />
       <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/kherge/semver" />
+      <path value="$PROJECT_DIR$/vendor/dhii/validation-interface" />
+      <path value="$PROJECT_DIR$/vendor/dhii/stringable-interface" />
+      <path value="$PROJECT_DIR$/vendor/dhii/package-interface" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
@@ -139,6 +143,7 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <phpunit_by_interpreter interpreter_id="b69fe429-2670-4215-b606-e6c708db5409" configuration_file_path="/srv/phpunit.xml.dist" custom_loader_path="/srv/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
     </phpunit_settings>
   </component>
 </project>
