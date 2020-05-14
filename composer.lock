@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2acfb114ab843cb711fbee5c55bb1e18",
+    "content-hash": "4f70b829203f910175a9773dd87d5156",
     "packages": [
         {
             "name": "dhii/package-interface",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/package-interface.git",
-                "reference": "1c3a91d237a2f564f04a358dcff85a00040190a4"
+                "reference": "0e2859d177a7f22c4cf0469c030990c2b32932ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/package-interface/zipball/1c3a91d237a2f564f04a358dcff85a00040190a4",
-                "reference": "1c3a91d237a2f564f04a358dcff85a00040190a4",
+                "url": "https://api.github.com/repos/Dhii/package-interface/zipball/0e2859d177a7f22c4cf0469c030990c2b32932ec",
+                "reference": "0e2859d177a7f22c4cf0469c030990c2b32932ec",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                 }
             ],
             "description": "Interfaces for package-related interop",
-            "time": "2020-05-14T01:14:38+00:00"
+            "time": "2020-05-14T11:57:59+00:00"
         },
         {
             "name": "dhii/stringable-interface",
@@ -196,58 +196,6 @@
                 "instantiate"
             ],
             "time": "2019-12-23T19:18:31+00:00"
-        },
-        {
-            "name": "kherge/semver",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kherge/php.semver.git",
-                "reference": "2c39d26f9cd4f266cdd6ba92f0815957dab80847"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kherge/php.semver/zipball/2c39d26f9cd4f266cdd6ba92f0815957dab80847",
-                "reference": "2c39d26f9cd4f266cdd6ba92f0815957dab80847",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/KHerGe/Version/functions.php"
-                ],
-                "psr-4": {
-                    "KHerGe\\Version\\": "src/KHerGe/Version"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT",
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Kevin Herrera",
-                    "email": "kevin@herrera.io",
-                    "homepage": "http://kevin.herrera.io/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Manages semantic version numbers and compares them.",
-            "keywords": [
-                "semantic",
-                "semver",
-                "versioning"
-            ],
-            "time": "2020-02-03T16:08:37+00:00"
         },
         {
             "name": "myclabs/deep-copy",
