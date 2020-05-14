@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Dhii/package-interface.git",
-                "reference": "0e2859d177a7f22c4cf0469c030990c2b32932ec"
+                "reference": "102c85efd69f7ad980b92e4f919aed2d8f505dea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Dhii/package-interface/zipball/0e2859d177a7f22c4cf0469c030990c2b32932ec",
-                "reference": "0e2859d177a7f22c4cf0469c030990c2b32932ec",
+                "url": "https://api.github.com/repos/Dhii/package-interface/zipball/102c85efd69f7ad980b92e4f919aed2d8f505dea",
+                "reference": "102c85efd69f7ad980b92e4f919aed2d8f505dea",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                 }
             ],
             "description": "Interfaces for package-related interop",
-            "time": "2020-05-14T11:57:59+00:00"
+            "time": "2020-05-14T17:11:52+00:00"
         },
         {
             "name": "dhii/stringable-interface",
