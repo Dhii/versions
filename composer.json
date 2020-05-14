@@ -1,0 +1,12 @@
+{
+  "name": "dhii/versions",
+  "description": "Implementation for dealing with SemVer-compliant versions",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Anton Ukhanev",
+      "email": "xedin.unknown@gmail.com"
+    }
+  ]
+}
