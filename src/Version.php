@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Dhii\Versions;
 
 use Dhii\Package\Version\VersionInterface;
+use DomainException;
 use Exception;
 use RangeException;
 
@@ -40,6 +41,7 @@ class Version implements VersionInterface
      * @param array $preRelease A list of pre-release identifiers. See {@see getPreRelease()}.
      * @param array $build A list of build identifiers. See {@see getBuild()}.
      *
+     * @throws RangeException If an identifier is malformed
      * @throws Exception If problem creating.
      */
     public function __construct(
@@ -122,7 +124,7 @@ class Version implements VersionInterface
      *
      * @return string An identifier with all disallowed characters removed.
      *
-     * @throws RangeException If could not normalize.
+     * @throws DomainException If identifier is malformed
      * @throws Exception If problem normalizing.
      */
     protected function normalizeIdentifier(string $identifier): string
@@ -132,7 +134,7 @@ class Version implements VersionInterface
         $identifier = preg_replace('![^\d\w-]!', '', $identifier);
 
         if (!strlen($identifier)) {
-            throw new RangeException(sprintf('Identifier "%1$s" normalized to "%2$s" is empty', $origIdentifier, $identifier));
+            throw new DomainException(sprintf('Identifier "%1$s" normalized to "%2$s" is empty', $origIdentifier, $identifier));
         }
 
         return $identifier;
@@ -159,7 +161,7 @@ class Version implements VersionInterface
         foreach ($preRelease as $idx => $identifier) {
             try {
                 $identifier = $this->normalizeIdentifier($identifier);
-            } catch (RangeException $e) {
+            } catch (DomainException $e) {
                 throw new RangeException(sprintf('Pre-release identifier #%1$d "%2$s" cannot be normalized', $idx, $identifier), 0, $e);
             }
             if (is_numeric($identifier)) {
@@ -192,7 +194,7 @@ class Version implements VersionInterface
         foreach ($build as $idx => $identifier) {
             try {
                 $identifier = $this->normalizeIdentifier($identifier);
-            } catch (RangeException $e) {
+            } catch (DomainException $e) {
                 throw new RangeException(sprintf('Build identifier #%1$d "%2$s" cannot be normalized', $idx, $identifier), 0, $e);
             }
 
