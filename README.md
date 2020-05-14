@@ -7,6 +7,8 @@ numbers, while being standards compliant itself.
 
 ## Usage
 ```php
+<?php
+
 use Dhii\Versions\StringVersionFactory;
 
 $factory = new StringVersionFactory();
