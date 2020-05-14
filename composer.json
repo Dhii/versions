@@ -8,5 +8,17 @@
       "name": "Anton Ukhanev",
       "email": "xedin.unknown@gmail.com"
     }
-  ]
+  ],
+  "require": {
+    "php": "^7.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0 | ^8.0"
+  },
+  "autoload": {
+    "Dhii\\Versions\\": "src"
+  },
+  "autoload-dev": {
+    "Dhii\\Versions\\Test\\Functional\\": "tests/func"
+  }
 }
