@@ -35,8 +35,8 @@ class VersionTest extends TestCase
     protected function createPreRelease(): array
     {
         $version = [];
-        $version[] = (['alpha', 'beta', 'RC'])[rand(0, 2)];
-        $idsLength = rand(2, 4);
+        $version[] = (['alpha', 'beta', 'RC'])[random_int(0, 2)];
+        $idsLength = random_int(2, 4);
 
         for ($i=0; $i<$idsLength; $i++) {
             $version[] = $this->createIdentifier();
@@ -48,7 +48,7 @@ class VersionTest extends TestCase
     protected function createBuild(): array
     {
         $version = [];
-        $idsLength = rand(2, 4);
+        $idsLength = random_int(2, 4);
 
         for ($i=0; $i<$idsLength; $i++) {
             $version[] = $this->createIdentifier();
@@ -59,10 +59,10 @@ class VersionTest extends TestCase
 
     protected function createIdentifier(): string
     {
-        $isNumeric = (bool) rand(0, 1);
+        $isNumeric = (bool) random_int(0, 1);
         $identifier = $isNumeric
-            ? rand(1, 99)
-            : $this->createString(rand(1, 5));
+            ? random_int(1, 99)
+            : $this->createString(random_int(1, 5));
 
         return $identifier;
     }
@@ -73,7 +73,7 @@ class VersionTest extends TestCase
         $charsLength = strlen($chars);
         $string = '';
         for ($i = 0; $i < $length; $i++) {
-            $string .= $chars[rand(0, $charsLength - 1)];
+            $string .= $chars[random_int(0, $charsLength - 1)];
         }
         return $string;
     }
@@ -81,9 +81,9 @@ class VersionTest extends TestCase
     public function testToString()
     {
         {
-            $major = rand(1, 9);
-            $minor = rand(1, 99);
-            $patch = rand(1, 999);
+            $major = random_int(1, 9);
+            $minor = random_int(1, 99);
+            $patch = random_int(1, 999);
             $preRelease = $this->createPreRelease();
             $build = $this->createBuild();
             $subject = $this->createSubject($major, $minor, $patch, $preRelease, $build);
