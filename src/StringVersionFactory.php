@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Dhii\Versions;
@@ -20,10 +21,10 @@ class StringVersionFactory implements StringVersionFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createVersionFromString(string $version): VersionInterface
+    public function createVersionFromString(string $versionString): VersionInterface
     {
         try {
-            $components = $this->parseVersion($version);
+            $components = $this->parseVersion($versionString);
             $version = new Version(
                 $components['major'],
                 $components['minor'],
@@ -32,7 +33,7 @@ class StringVersionFactory implements StringVersionFactoryInterface
                 $components['build']
             );
         } catch (RangeException $e) {
-            throw new DomainException(sprintf('Version string "%1$s" is malformed', $version), 0, $e);
+            throw new DomainException(sprintf('Version string "%1$s" is malformed', $versionString), 0, $e);
         }
 
         return $version;
@@ -43,13 +44,13 @@ class StringVersionFactory implements StringVersionFactoryInterface
      *
      * @param string $version The version string.
      *
-     * @return array The map of component name to value.
-     *               The following keys will be present:
-     *               - `major` (int) - The major version number.
-     *               - `minor` (int) - The minor version number.
-     *               - `patch` (int) - The patch version number.
-     *               - `pre_release` (array) - A list of pre-release identifiers.
-     *               - `build` (array) - A list of build identifiers.
+     * @return array{
+     *  major: int,
+     *  minor: int,
+     *  patch: int,
+     *  pre_release: string[],
+     *  build: string[]
+     * }
      *
      * @throws DomainException If version string is malformed.
      * @throws Exception If problem parsing.

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Dhii\Versions;
@@ -7,6 +8,8 @@ use Dhii\Package\Version\VersionInterface;
 use DomainException;
 use Exception;
 use RangeException;
+use RuntimeException;
+use Stringable;
 
 /**
  * A value object containing information about a SemVer-compliant version.
@@ -26,20 +29,20 @@ class Version implements VersionInterface
      */
     protected $patch;
     /**
-     * @var string
+     * @var string[]
      */
     protected $preRelease;
     /**
-     * @var string
+     * @var string[]
      */
     protected $build;
 
     /**
-     * @param int   $major The major version number. See {@see getMajor()}.
-     * @param int   $minor The minor version number See {@see getMinor()}.
-     * @param int   $patch The patch version number. See {@see getPatch()}.
-     * @param array $preRelease A list of pre-release identifiers. See {@see getPreRelease()}.
-     * @param array $build A list of build identifiers. See {@see getBuild()}.
+     * @param int $major The major version number. See {@see getMajor()}.
+     * @param int $minor The minor version number See {@see getMinor()}.
+     * @param int $patch The patch version number. See {@see getPatch()}.
+     * @param array<string|Stringable> $preRelease A list of pre-release identifiers. See {@see getPreRelease()}.
+     * @param array<string|Stringable> $build A list of build identifiers. See {@see getBuild()}.
      *
      * @throws RangeException If an identifier is malformed
      * @throws Exception If problem creating.
@@ -56,24 +59,6 @@ class Version implements VersionInterface
         $this->patch = $patch;
         $this->preRelease = $this->normalizePreRelease($preRelease);
         $this->build = $this->normalizeBuild($build);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __toString()
-    {
-        $version = "{$this->major}.{$this->minor}.{$this->patch}";
-
-        if (count($this->preRelease)) {
-            $version .= '-' . implode('.', $this->preRelease);
-        }
-
-        if (count($this->build)) {
-            $version .= '+' . implode('.', $this->build);
-        }
-
-        return $version;
     }
 
     /**
@@ -131,7 +116,7 @@ class Version implements VersionInterface
     {
         $origIdentifier = $identifier;
 
-        $identifier = preg_replace('![^\d\w-]!', '', $identifier);
+        $identifier = $this->replace('![^\d\w-]!', '', $identifier);
 
         if (!strlen($identifier)) {
             throw new DomainException(sprintf('Identifier "%1$s" normalized to "%2$s" is empty', $origIdentifier, $identifier));
@@ -145,11 +130,11 @@ class Version implements VersionInterface
      *
      * Will remove all illegal characters.
      *
-     * @param iterable $preRelease The series of identifiers to normalize.
+     * @param iterable|array<string|Stringable> $preRelease The series of identifiers to normalize.
      *                             Each is a non-empty alphanumeric+hyphen string.
      *                             If numeric, leading zeroes are not allowed.
      *
-     * @return array A series of normalized pre-release identifiers.
+     * @return string[] A series of normalized pre-release identifiers.
      *
      * @throws RangeException If could not normalize.
      * @throws Exception If problem normalizing.
@@ -159,6 +144,8 @@ class Version implements VersionInterface
         $normalized = [];
 
         foreach ($preRelease as $idx => $identifier) {
+            $identifier = (string) $identifier;
+
             try {
                 $identifier = $this->normalizeIdentifier($identifier);
             } catch (DomainException $e) {
@@ -179,10 +166,10 @@ class Version implements VersionInterface
      *
      * Will remove all illegal characters.
      *
-     * @param iterable $build The series of identifiers to normalize.
+     * @param iterable|array<string|Stringable> $build The series of identifiers to normalize.
      *                             Each is a non-empty alphanumeric+hyphen string.
      *
-     * @return array A series of normalized build identifiers.
+     * @return string[] A series of normalized build identifiers.
      *
      * @throws RangeException If could not normalize.
      * @throws Exception If problem normalizing.
@@ -192,6 +179,8 @@ class Version implements VersionInterface
         $normalized = [];
 
         foreach ($build as $idx => $identifier) {
+            $identifier = (string) $identifier;
+
             try {
                 $identifier = $this->normalizeIdentifier($identifier);
             } catch (DomainException $e) {
@@ -202,5 +191,50 @@ class Version implements VersionInterface
         }
 
         return $normalized;
+    }
+
+    /**
+     * Replaces occurrences of $pattern in $subject.
+     *
+     * @param string $pattern The pattern to use for replacing.
+     * @param string $replacement The replacement.
+     * @param string $subject The subject.
+     *
+     * @return string The result of replacement.
+     *
+     * @throws Exception If problem replacing.
+     */
+    protected function replace(string $pattern, string $replacement, string $subject): string
+    {
+        $result = preg_replace($pattern, $replacement, $subject);
+
+        if ($result === null) {
+            $code = preg_last_error();
+            $code = $code ? $code : 0;
+            $message = preg_last_error_msg();
+            $message = !empty($message) ? $message : 'Could not replace';
+
+            throw new RuntimeException($message, $code);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        $version = "{$this->major}.{$this->minor}.{$this->patch}";
+
+        if (count($this->preRelease)) {
+            $version .= '-' . implode('.', $this->preRelease);
+        }
+
+        if (count($this->build)) {
+            $version .= '+' . implode('.', $this->build);
+        }
+
+        return $version;
     }
 }
