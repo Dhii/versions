@@ -44,13 +44,13 @@ class StringVersionFactory implements StringVersionFactoryInterface
      *
      * @param string $version The version string.
      *
-     * @return array<int|string[]> The map of component name to value.
-     *               The following keys will be present:
-     *               - `major` (int) - The major version number.
-     *               - `minor` (int) - The minor version number.
-     *               - `patch` (int) - The patch version number.
-     *               - `pre_release` (string[]) - A list of pre-release identifiers.
-     *               - `build` (string[]) - A list of build identifiers.
+     * @return array{
+     *  major: int,
+     *  minor: int,
+     *  patch: int,
+     *  pre_release: string[],
+     *  build: string[]
+     * }
      *
      * @throws DomainException If version string is malformed.
      * @throws Exception If problem parsing.
