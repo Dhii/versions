@@ -20,10 +20,10 @@ class StringVersionFactory implements StringVersionFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createVersionFromString(string $version): VersionInterface
+    public function createVersionFromString(string $versionString): VersionInterface
     {
         try {
-            $components = $this->parseVersion($version);
+            $components = $this->parseVersion($versionString);
             $version = new Version(
                 $components['major'],
                 $components['minor'],
@@ -32,7 +32,7 @@ class StringVersionFactory implements StringVersionFactoryInterface
                 $components['build']
             );
         } catch (RangeException $e) {
-            throw new DomainException(sprintf('Version string "%1$s" is malformed', $version), 0, $e);
+            throw new DomainException(sprintf('Version string "%1$s" is malformed', $versionString), 0, $e);
         }
 
         return $version;
