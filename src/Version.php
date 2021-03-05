@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Dhii\Versions;
@@ -58,24 +59,6 @@ class Version implements VersionInterface
         $this->patch = $patch;
         $this->preRelease = $this->normalizePreRelease($preRelease);
         $this->build = $this->normalizeBuild($build);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __toString()
-    {
-        $version = "{$this->major}.{$this->minor}.{$this->patch}";
-
-        if (count($this->preRelease)) {
-            $version .= '-' . implode('.', $this->preRelease);
-        }
-
-        if (count($this->build)) {
-            $version .= '+' . implode('.', $this->build);
-        }
-
-        return $version;
     }
 
     /**
@@ -235,5 +218,23 @@ class Version implements VersionInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        $version = "{$this->major}.{$this->minor}.{$this->patch}";
+
+        if (count($this->preRelease)) {
+            $version .= '-' . implode('.', $this->preRelease);
+        }
+
+        if (count($this->build)) {
+            $version .= '+' . implode('.', $this->build);
+        }
+
+        return $version;
     }
 }
