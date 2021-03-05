@@ -1,4 +1,8 @@
 # Dhii - Versions
+[![Continuous Integration](https://github.com/Dhii/versions/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/Dhii/versions/actions/workflows/continuous-integration.yml)
+[![Latest Stable Version](https://poser.pugx.org/dhii/versions/v)](//packagist.org/packages/dhii/versions)
+[![Latest Unstable Version](https://poser.pugx.org/dhii/versions/v/unstable)](//packagist.org/packages/dhii/versions)
+
 Implementation for dealing with SemVer-compliant versions.
 
 ## Details
