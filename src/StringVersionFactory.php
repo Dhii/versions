@@ -9,6 +9,8 @@ use Dhii\Package\Version\VersionInterface;
 use DomainException;
 use Exception;
 use RangeException;
+use RuntimeException;
+use UnexpectedValueException;
 
 /**
  * @inheritDoc
@@ -118,11 +120,26 @@ class StringVersionFactory implements StringVersionFactoryInterface
      * @param int|null $length The length of the substring, or `null` to get the remaining characters.
      *
      * @return string The substring.
+     *
+     * @throws RuntimeException If problem retrieving.
      */
     protected function getSubstring(string $string, int $start, ?int $length): string
     {
-        return is_null($length)
+        $substring = is_null($length)
             ? substr($string, $start)
             : substr($string, $start, $length);
+
+        if (!is_string($substring)) {
+            throw new UnexpectedValueException(
+                sprintf(
+                    'Could not extract a substring of a string "%1$d" chars long, starting from "%2$d" for "%3$d" chars',
+                    $string,
+                    $start,
+                    $length ?? 'null'
+                )
+            );
+        }
+
+        return $substring;
     }
 }

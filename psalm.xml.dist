@@ -9,8 +9,6 @@
         usePhpDocMethodsWithoutMagicCall="false"
         strictBinaryOperands="true"
         rememberPropertyAssignmentsAfterCall="true"
-        allowPhpStormGenerics="true"
-        allowCoercionFromStringToClassConst="false"
         allowStringToStandInForClass="false"
         memoizeMethodCallResults="false"
         hoistConstants="false"
@@ -148,5 +146,6 @@
         <MixedReturnStatement errorLevel="info"/>
         <MixedReturnTypeCoercion errorLevel="info"/>
         <MixedStringOffsetAssignment errorLevel="info"/>
+        <ParamNameMismatch errorLevel="info"/>
     </issueHandlers>
 </psalm>
