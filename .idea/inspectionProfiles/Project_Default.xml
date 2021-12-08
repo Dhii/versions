@@ -42,7 +42,7 @@
       <option name="m_minLength" value="3" />
     </inspection_tool>
     <inspection_tool class="PsalmGlobal" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <scope name="Tests" level="WEAK WARNING" enabled="true">
+      <scope name="Tests" level="WEAK WARNING" enabled="false">
         <option name="config" value="/app/psalm.xml.dist" />
         <option name="showInfo" value="true" />
         <option name="findUnusedCode" value="true" />
